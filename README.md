@@ -1,2 +1,70 @@
 # expojs-local-build
-Build your ExpoJS/EAS app with Docker
+
+Build your ExpoJS/EAS locally app with Docker.
+Install in Docker all you need for Expo application, Android only.
+
+## Versions
+
+Node: 20.19.6
+
+## How To
+
+- create Github token
+- create ExpoJS token
+
+At docker host :
+- create ~/repos/
+- clone your repo
+
+Create launcher in ~/repo :
+```sh
+echo -----------------------------------------
+
+echo Launching build...
+echo ...of:             $1
+echo ...from image:     $2
+echo ----------------------------------------
+
+if [ -z "${EXPO_TOKEN}" ]; then
+  echo "EXPO_TOKEN is not defined, see https://docs.expo.dev/accounts/programmatic-access/"
+  exit 1
+else
+  echo "EXPO token is defined"
+fi
+
+CWD=$(pwd)
+REPO="$CWD/$1"
+
+if [[ -d $REPO ]]; then
+    echo "...$REPO is a directory"
+    echo "...starting docker $2"
+    docker run --name "$1" -e EXPO_TOKEN="${EXPO_TOKEN}" --mount src="${REPO}",target=/root/build,type=bind "$2"
+    # remove the container after run
+    docker rm $1
+else
+    echo "$REPO is not valid"
+    exit 1
+fi
+```
+
+Build Docker image
+```sh
+docker build .
+```
+Kepp the image id on last line.
+
+Launch in ~/repos
+```sh
+export EXPO_TOKEN=XXXXXX && ./launchbuild-expojs.sh your_repo_dir docker_image_id
+```
+
+## package.json
+
+Should have a line like
+y```
+"dev:build-local:preview": "NODE_ENV=production npx eas-cli build --profile preview --platform android --local --clear-cache --freeze-credentials --non-interactive",
+```
+
+## status
+
+Currently nor working
