@@ -61,7 +61,7 @@ export EXPO_TOKEN=XXXXXX && ./launchbuild-expojs.sh your_repo_dir docker_image_i
 ## package.json
 
 Should have a line like
-y```
+```
 "dev:build-local:preview": "NODE_ENV=production npx eas-cli build --profile preview --platform android --local --clear-cache --freeze-credentials --non-interactive",
 ```
 
