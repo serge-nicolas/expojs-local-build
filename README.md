@@ -55,7 +55,7 @@ Kepp the image id on last line.
 
 Launch in ~/repos
 ```sh
-export EXPO_TOKEN=XXXXXX && ./launchbuild-expojs.sh your_repo_dir docker_image_id
+export EXPO_TOKEN=XXXXXX && ./launcher.sh your_repo_dir docker_image_id
 ```
 
 ## package.json
