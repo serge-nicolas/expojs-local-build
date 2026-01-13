@@ -29,7 +29,7 @@ if [ -z "${EXPO_TOKEN}" ]; then
   echo "EXPO_TOKEN is not defined, see https://docs.expo.dev/accounts/programmatic-access/"
   exit 1
 else
-  echo "EXPO token is defined"
+  echo "EXPO_TOKEN is defined"
 fi
 
 CWD=$(pwd)
