@@ -38,9 +38,6 @@ REPO="$CWD/$1"
 if [[ -d $REPO ]]; then
     echo "...$REPO is a directory"
     echo "...starting docker $2"
-    docker run --name "$1" -e EXPO_TOKEN="${EXPO_TOKEN}" --mount src="${REPO}",target=/root/build,type=bind "$2"
-    # remove the container after run
-    docker rm $1
 else
     echo "$REPO is not valid"
     exit 1
