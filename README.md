@@ -1,5 +1,7 @@
 # expojs-local-build
 
+WIP - not working
+
 Build your ExpoJS/EAS locally app with Docker.
 Install in Docker all you need for Expo application, Android only.
 
@@ -64,4 +66,4 @@ Should have a line like
 
 ## status
 
-Currently nor working
+WIP - Currently nor working
