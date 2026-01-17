@@ -74,10 +74,10 @@ if [[ -d $REPO ]]; then
     if [ "$DEBUG" -eq 1 ]; then
         echo "... in debug mode"
         echo "The Docker $1-debug will be kept alive"
-        docker run --name "$1-debug" -e EXPO_TOKEN="${EXPO_TOKEN}" --mount src="${REPO}",target=/roo>
+        docker run --name "$1-debug" -e EXPO_TOKEN="${EXPO_TOKEN}" --mount src="${REPO}",target=/root/build,type=bind "$2" tail -f /dev/null
     else
         echo "... in prod mode"
-        docker run --name "$1" -e EXPO_TOKEN="${EXPO_TOKEN}" --mount src="${REPO}",target=/root/buil>
+        docker run --name "$1" -e EXPO_TOKEN="${EXPO_TOKEN}" --mount src="${REPO}",target=/root/build,type=bind "$2"
         docker rm $1
     fi
 else
