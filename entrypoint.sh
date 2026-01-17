@@ -16,6 +16,9 @@ git status
 echo #### installing
 yarn install
 
+echo #### review and upgrade dependencies
+npx expo install --check
+
 echo #### build
 # change for your package.json command to build
 yarn run dev:build-local:preview
