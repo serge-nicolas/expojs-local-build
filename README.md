@@ -48,13 +48,13 @@ fi
 
 Build Docker image
 ```sh
-docker build .
+docker build . -t expojs-builder
 ```
 Kepp the image id on last line.
 
 Launch in ~/repos
 ```sh
-export EXPO_TOKEN=XXXXXX && ./launcher.sh your_repo_dir docker_image_id
+export EXPO_TOKEN=XXXXXX && ./launcher.sh your_repo_dir expojs-builder
 ```
 
 ## package.json
@@ -64,6 +64,3 @@ Should have a line like
 "dev:build-local:preview": "NODE_ENV=production npx eas-cli build --profile preview --platform android --local --clear-cache --freeze-credentials --non-interactive",
 ```
 
-## status
-
-WIP - Currently nor working
