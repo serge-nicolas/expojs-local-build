@@ -50,7 +50,6 @@ Build Docker image
 ```sh
 docker build . -t expojs-builder
 ```
-Kepp the image id on last line.
 
 Launch in ~/repos
 ```sh
