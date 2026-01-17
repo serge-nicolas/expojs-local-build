@@ -9,6 +9,11 @@ Install in Docker all you need for Expo application, Android only.
 
 Node: 20.19.6
 
+## warning
+
+See https://docs.gradle.org/current/userguide/compatibility.html
+
+
 ## How To
 
 - create Github token
