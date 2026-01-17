@@ -21,7 +21,7 @@ See https://docs.gradle.org/current/userguide/compatibility.html
 
 At docker host :
 - create ~/repos/
-- clone your repo
+- clone your reo in a subfolder
 
 Create launcher in ~/repo :
 ```sh
@@ -78,7 +78,7 @@ if [[ -d $REPO ]]; then
     else
         echo "... in prod mode"
         docker run --name "$1" -e EXPO_TOKEN="${EXPO_TOKEN}" --mount src="${REPO}",target=/root/build,type=bind "$2"
-        docker rm $1
+        docker rm $1your_repo_dir
     fi
 else
     echo "$REPO is not valid"
@@ -86,14 +86,20 @@ else
 fi
 ```
 
-Build Docker image
+Build the Docker image
 ```sh
 docker build . -t expojs-builder
 ```
 
-Launch in ~/repos
+Launch in ~/repos, this create a docker named 'your_repo_dir'
 ```sh
 export EXPO_TOKEN=XXXXXX && ./launcher.sh your_repo_dir expojs-builder
+```
+
+Start the container for manually building strategy
+```sh
+export EXPO_TOKEN=XXXXXX && ./launcher.sh your_repo_dir expojs-builder --debug
+docker exec -it your_repo_dir /bin/bash
 ```
 
 ## package.json
@@ -102,4 +108,5 @@ Should have a line like
 ```
 "dev:build-local:preview": "NODE_ENV=production npx eas-cli build --profile preview --platform android --local --clear-cache --freeze-credentials --non-interactive",
 ```
+or adjust in entrypoint.sh.
 
