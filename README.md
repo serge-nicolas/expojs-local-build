@@ -25,12 +25,38 @@ At docker host :
 
 Create launcher in ~/repo :
 ```sh
-echo -----------------------------------------
+DEBUG=0
 
-echo Launching build...
-echo ...of:             $1
-echo ...from image:     $2
-echo ----------------------------------------
+# Parse args
+POSITIONAL_ARGS=()
+
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    --debug)
+      DEBUG=1
+      shift # past argument
+      ;;
+    -*|--*)
+      echo "Unknown option $1"
+      exit 1
+      ;;
+    *)
+      POSITIONAL_ARGS+=("$1") # save positional arg
+      shift # past argument
+      ;;
+  esac
+done
+
+set -- "${POSITIONAL_ARGS[@]}"
+
+echo "-----------------------------------------"
+
+echo "Launching build..."
+echo "   of:             $1"
+echo "   from image:     $2"
+echo "   expo token :    $EXPO_TOKEN"
+echo "   debug mode :    $DEBUG"
+echo "----------------------------------------"
 
 if [ -z "${EXPO_TOKEN}" ]; then
   echo "EXPO_TOKEN is not defined, see https://docs.expo.dev/accounts/programmatic-access/"
@@ -43,8 +69,17 @@ CWD=$(pwd)
 REPO="$CWD/$1"
 
 if [[ -d $REPO ]]; then
-    echo "...$REPO is a directory"
-    echo "...starting docker $2"
+    echo "... $REPO is a directory"
+    echo "... starting docker $2"
+    if [ "$DEBUG" -eq 1 ]; then
+        echo "... in debug mode"
+        echo "The Docker $1-debug will be kept alive"
+        docker run --name "$1-debug" -e EXPO_TOKEN="${EXPO_TOKEN}" --mount src="${REPO}",target=/roo>
+    else
+        echo "... in prod mode"
+        docker run --name "$1" -e EXPO_TOKEN="${EXPO_TOKEN}" --mount src="${REPO}",target=/root/buil>
+        docker rm $1
+    fi
 else
     echo "$REPO is not valid"
     exit 1
