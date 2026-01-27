@@ -113,19 +113,32 @@ To install the file in your device, use KDEConnect (easyiest) or use ADB.
 
 To use ADB :
 - download android tools : https://developer.android.com/tools/releases/platform-tools
+- 
 On your device
+
 Go to the developer settings
+
 Press Enable Wireless debugging
+
 Select Pair device with pairing code
+
 You will see a dialog showing you IP address, port and a code.
 
+
 On your computer
+
 Open a command line window
+
 Type adb pair <ip>:<port> and replace <ip> and <port> with the data seen on the device
+
 You will be asked for the pairing code. Type it in and hit Enter
+
 You will now see an output similar to Successfully paired to <ip>:<port>
+
 To connect to the device, type adb connect <ip>:<port> and replace <ip> and <port> with the data seen on the Wireless debugging page after closing the pairing dialog
+
 Additionally you will get a notification on your device.
+
 
 (from https://wiki.lineageos.org/how-to/adb-over-wifi/)
 
