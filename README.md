@@ -1,8 +1,8 @@
 # expojs-local-build
 
-WIP - not working
+WIP - APK file generated but SDK/NDK and gradle are redownloaded and reinstalled.
 
-Build your ExpoJS/EAS locally app with Docker.
+Build your ExpoJS/EAS locally app with a prebuild Docker image.
 Install in Docker all you need for Expo application, Android only.
 
 ## Versions
@@ -96,6 +96,8 @@ Launch in ~/repos, this create a docker named 'your_repo_dir'
 ```sh
 export EXPO_TOKEN=XXXXXX && ./launcher.sh your_repo_dir expojs-builder
 ```
+
+The APK/AAB file generated can be found in the ~/repos/your_repo_dir/.
 
 Start the container for manually building strategy
 ```sh
