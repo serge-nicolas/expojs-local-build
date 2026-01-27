@@ -99,11 +99,54 @@ export EXPO_TOKEN=XXXXXX && ./launcher.sh your_repo_dir expojs-builder
 
 The APK/AAB file generated can be found in the ~/repos/your_repo_dir/.
 
+
+
 Start the container for manually building strategy
 ```sh
 export EXPO_TOKEN=XXXXXX && ./launcher.sh your_repo_dir expojs-builder --debug
 docker exec -it your_repo_dir /bin/bash
 ```
+
+## the generated file
+
+To install the file in your device, use KDEConnect (easyiest) or use ADB.
+
+To use ADB :
+- download android tools : https://developer.android.com/tools/releases/platform-tools
+On your device
+Go to the developer settings
+Press Enable Wireless debugging
+Select Pair device with pairing code
+You will see a dialog showing you IP address, port and a code.
+
+On your computer
+Open a command line window
+Type adb pair <ip>:<port> and replace <ip> and <port> with the data seen on the device
+You will be asked for the pairing code. Type it in and hit Enter
+You will now see an output similar to Successfully paired to <ip>:<port>
+To connect to the device, type adb connect <ip>:<port> and replace <ip> and <port> with the data seen on the Wireless debugging page after closing the pairing dialog
+Additionally you will get a notification on your device.
+
+(from https://wiki.lineageos.org/how-to/adb-over-wifi/)
+
+Rename your file.
+
+Push to your device :
+```
+adb push your.apk /your/destination/dir
+```
+
+Or install direclty
+```
+adb -s <ip>:<port> install -r your-builded.apk
+```
+
+your can find your destination dir with 
+```
+adb shell
+```
+
+Use a VPN if the host and the device are not on the same network.
 
 ## package.json
 
@@ -111,5 +154,5 @@ Should have a line like
 ```
 "dev:build-local:preview": "NODE_ENV=production npx eas-cli build --profile preview --platform android --local --clear-cache --freeze-credentials --non-interactive",
 ```
-or adjust in entrypoint.sh.
+or adjust the ```yarn run``` in entrypoint.sh.
 
