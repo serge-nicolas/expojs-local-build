@@ -7,7 +7,7 @@ Install in Docker all you need for Expo application, Android only.
 
 ## Versions
 
-Node will be installed from your package.json {"engines" : { "node" : "20.19.6" }} using nvm
+Node will be installed from your package.json ```{"engines" : { "node" : "20.19.6" }}``` using nvm
 Default node version : 20.20.0
 
 ## warning
